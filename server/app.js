@@ -1,8 +1,9 @@
 const express=require('express');
 const app=express();
 const cors=require('cors');
-const todoroute=require('./router/todo')
+const todoRoute=require('./router/todo')
 const Task = require("./models/task");
+const userRoute=require('./router/user')
 app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
 const mongoose = require("mongoose");
@@ -17,9 +18,10 @@ const tt = async () => {
     { text: "Buy Groceries", category: "Personal" },
     ];
     await Task.insertMany(tasks);
-    console.log("✅ Tasks added successfully");
+    console.log("Tasks added successfully");
 }
-app.use('/task', todoroute);
+app.use('/task', todoRoute);
+app.use('/user',userRoute);
 // tt();
 app.listen(3000,()=>{
     console.log("Listening on port 3000");

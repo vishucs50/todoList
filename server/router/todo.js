@@ -1,18 +1,26 @@
 const express = require("express");
 const router = express.Router();
 const Task=require('../models/task');
-router.get("/gettask", async (req, res) => {
+const User=require('../models/user')
+router.get("/gettask/:id", async (req, res) => {
   try {
-    const tasks = await Task.find({});
+    const {id}=req.params;
+    const user=await User.findOne({firebaseUID:id});
+    console.log(user);
+    if (!user) return res.status(404).json({ error: "User not found" });
+    const tasks = await Task.find({userId:user._id});
     // console.log(tasks);
     res.json(tasks);
   } catch (err) {
     res.status(500).json({ error: "Failed to fetch tasks" });
   }
 });
-router.post('/addtask',async (req,res)=>{
+router.post('/addtask/:id',async (req,res)=>{
+  const { id } = req.params;
+  const user = await User.findOne({firebaseUID:id});
+  console.log(user);
    const {text}=req.body;
-   const newtodo=new Task({text,done:false,edit:false});
+   const newtodo=new Task({text,userId:user._id,done:false,edit:false});
    await newtodo.save();
    res.json(newtodo);
 })

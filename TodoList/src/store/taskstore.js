@@ -4,9 +4,9 @@ import axios from "axios";
 const TodoStore = (set) => ({
   todos: [],
   settodo: (todos) => set(() => ({ todos })),
-  addTodo: async (text) => {
+  addTodo: async (text,id) => {
     try {
-      const res = await axios.post("/task/addtask", { text });
+      const res = await axios.post(`/task/addtask/${id}`, { text });
       set((state) => ({
         todos: [res.data, ...state.todos],
       }));

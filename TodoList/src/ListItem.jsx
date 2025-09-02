@@ -12,8 +12,8 @@ export const ListItem = ({todo}) => {
   const setEdit= useTodoStore((state) => state.setEdit );
   const handleDelete = async () => {
     try {
-      await deletetodo(todo._id);
       toast.success("Todo deleted successfully");
+      await deletetodo(todo._id);
     } catch (err) {
       toast.error("Error deleting todo", err);
     }
@@ -37,6 +37,7 @@ export const ListItem = ({todo}) => {
   const handleSave=(id)=>{
     updatetodo(id,text,todo.done);
     setEdit(todo._id);
+    toast.success("Update Successfully!")
   }
   return (
     <div className="flex justify-between items-center w-full h-10 bg-blue-200 dark:bg-slate-800 rounded-2xl p-2 mb-2">
