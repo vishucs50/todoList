@@ -26,7 +26,7 @@
         
     },[]);
     return (
-      <div className="md:h-150 md:w-150 bg-blue-300 dark:bg-slate-800 rounded-2xl p-6">
+      <div className="md:h-150 md:w-150 mt-5 bg-blue-300 dark:bg-slate-800 rounded-2xl p-6">
         <form onSubmit={handleSubmit}>
           <div className="relative w-full h-10">
             <input
