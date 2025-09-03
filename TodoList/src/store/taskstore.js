@@ -1,12 +1,12 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import axios from "axios";
+import api from "../api";
 const TodoStore = (set) => ({
   todos: [],
   settodo: (todos) => set(() => ({ todos })),
   addTodo: async (text,id) => {
     try {
-      const res = await axios.post(`/task/addtask/${id}`, { text });
+      const res = await api.post(`/task/addtask/${id}`, { text });
       set((state) => ({
         todos: [res.data, ...state.todos],
       }));
@@ -28,7 +28,7 @@ const TodoStore = (set) => ({
     })),
   updatetodo: async (id, text, done) => {
     
-      const res = await axios.put(`task/update/${id}`, { text, done });
+      const res = await api.put(`task/update/${id}`, { text, done });
       set((state) => ({
         todos: state.todos.map(
           (t) => (t._id === id ? res.data : t) 
@@ -40,7 +40,7 @@ const TodoStore = (set) => ({
     set((state) => ({
       todos: state.todos.filter((todo) => todo._id != id),
     }));
-    await axios.delete(`task/delete/${id}`);
+    await api.delete(`task/delete/${id}`);
   },
 });
 const useTodoStore = create(
