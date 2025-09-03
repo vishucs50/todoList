@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { signOut } from "firebase/auth";
 import { toast } from "react-toastify";
 import { useAuth } from "../../context/authContext";
-import axios from "axios";
+import api from "../api";
 import { useEffect } from "react";
 import { auth } from "../../config/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -31,7 +31,7 @@ export default function RegisterForm() {
       const user = userCred.user;
       await updateProfile(user, { username: username });
       const idToken = await user.getIdToken();
-      await axios.post("/user/register", {
+      await api.post("/user/register", {
         username,
         email,
         token: idToken,
