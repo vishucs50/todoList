@@ -1,28 +1,35 @@
-const express=require('express');
-const app=express();
-const cors=require('cors');
-const todoRoute=require('./router/todo')
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
+
+const todoRoute = require("./router/todo");
+const userRoute = require("./router/user");
 const Task = require("./models/task");
-const userRoute=require('./router/user')
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+const dbUrl = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/TodoList";
+
 app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
-const mongoose = require("mongoose");
-const dbUrl = "mongodb://127.0.0.1:27017/TodoList";
-mongoose.connect(dbUrl);
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => console.log("Database connected"));
-const tt = async () => {
-    const tasks = [
-    { text: "Learn Zustand", category: "Study" },
-    { text: "Buy Groceries", category: "Personal" },
-    ];
-    await Task.insertMany(tasks);
-    console.log("Tasks added successfully");
-}
-app.use('/task', todoRoute);
-app.use('/user',userRoute);
-// tt();
-app.listen(3000,()=>{
-    console.log("Listening on port 3000");
-})
+
+// MongoDB connection
+mongoose
+  .connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Database connected"))
+  .catch((err) => console.error("DB connection error:", err));
+
+
+// Routes
+app.use("/task", todoRoute);
+app.use("/user", userRoute);
+
+// Error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: "Something went wrong!" });
+});
+
+// Start server
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
