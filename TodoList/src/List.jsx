@@ -1,6 +1,6 @@
   import { ListItem } from "./ListItem";
   import useTodoStore from "./store/taskstore";
-  import axios from "axios";
+  import api from "./api";
   import { useEffect,useState} from "react";
   import { useAuth } from "../context/authContext";
   import {toast} from "react-toastify"
@@ -22,7 +22,7 @@
 
       const fetchTodos = async () => {
         try {
-          const res = await axios.get(`/task/gettask/${user.uid}`);
+          const res = await api.get(`/task/gettask/${user.uid}`);
           console.log(res)
           settodo(res.data);
         } catch (err) {
