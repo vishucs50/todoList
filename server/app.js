@@ -5,7 +5,7 @@ const cors=require('cors');
 const todoRoute=require('./router/todo')
 const Task = require("./models/task");
 const userRoute=require('./router/user')
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: "https://todolist-2-szc8.onrender.com" }));
 app.use(express.json());
 const mongoose = require("mongoose");
 const PORT=3000;
