@@ -7,12 +7,12 @@ export default defineConfig({
   server: {
     proxy: {
       "/task": {
-        target: "http://localhost:3000",
+        target: "https://todolist-1-snqc.onrender.com",
         changeOrigin: true,
         secure: false,
       },
       "/user": {
-        target: "http://localhost:3000",
+        target: "https://todolist-1-snqc.onrender.com",
         changeOrigin: true,
         secure: false,
       },
