@@ -1,9 +1,9 @@
 import { List } from "./List"
 import Navbar from "./Navbar"
-import ToastContainerComponent from "../submission"
+import ToastContainerComponent from "./submission"
 import { Routes, Route } from "react-router"; 
-import RegisterPage from "../RegisterPage";
-import LoginPage from "../LoginPage";
+import RegisterPage from "./RegisterPage";
+import LoginPage from "./LoginPage";
 
 import PrivateRoute from "../context/PrivateRoute";
 function App() {
