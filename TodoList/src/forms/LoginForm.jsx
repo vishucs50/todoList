@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import api from "../api";
 import { useNavigate } from "react-router";
 import { auth } from "../../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -26,7 +26,7 @@ const LoginForm = () => {
       const userCred = await signInWithEmailAndPassword(auth, email, password);
       const user = userCred.user;
       const idToken = await user.getIdToken();
-      const userid = await axios.post("/user/login", {
+      const userid = await api.post("/user/login", {
         email,
         token: idToken,
       });
