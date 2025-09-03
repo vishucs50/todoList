@@ -1,4 +1,4 @@
-import useThemeStore from "./store/themeStore";
+import useThemeStore from "./store/ThemeStore";
 
 export default function ToggleButton() {
   const { darkMode, toggleDarkMode } = useThemeStore();

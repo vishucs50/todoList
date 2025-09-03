@@ -1,4 +1,4 @@
-import useThemeStore from "./store/themeStore";
+import useThemeStore from "./store/ThemeStore";
 import ToggleButton from "./ToggleButton";
 import { useEffect } from "react";
 import LogoutButton from "./forms/Logout";
