@@ -3,7 +3,7 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: import.meta.env.PROD
-    ? "https://todolist-1-snqc.onrender.com"
+    ? "https://todo-list-38fe.vercel.app/"
     : "http://localhost:3000"
 });
 
