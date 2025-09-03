@@ -1,6 +1,6 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useThemeStore from "./store/themeStore";
+import useThemeStore from "./store/ThemeStore";
 const ToastContainerComponent = () => {
     const darkMode=useThemeStore((state)=>state.darkMode);
   return (
